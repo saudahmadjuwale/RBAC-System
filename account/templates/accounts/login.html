@@ -4,8 +4,15 @@
     <title>Login</title>
 </head>
 <body>
-    
-    <span></sapn>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
     <h2>Login</h2>
 
     <form method="POST">

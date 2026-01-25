@@ -4,10 +4,21 @@
     <title>Dashboard</title>
 </head>
 <body>
+        {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
     <h2>Dashboard</h2>
 
     <p>Welcome, {{ request.user.email }}</p>
-
+    {% if request.user.is_staff %}
+        <a href="{% url 'create_user' %}">Create User</a><br><br>
+    {% endif %}
     <a href="{% url 'logout' %}">Logout</a>
 </body>
 </html>

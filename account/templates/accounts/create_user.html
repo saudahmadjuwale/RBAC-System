@@ -4,11 +4,20 @@
     <title>Create User</title>
 </head>
 <body>
+    
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
     <h2>Create User</h2>
 
     <form method="POST">
         {% csrf_token %}
-
         <label>Email:</label><br>
         <input type="email" name="email" required><br><br>
 

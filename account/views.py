@@ -1,6 +1,6 @@
 from django.shortcuts import redirect,render
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 # Create your views here.
 def login_view(request):
@@ -22,3 +22,17 @@ def dashboard(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+User = get_user_model()
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def create_user(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        if User.objects.filter(email=email).exists():
+            messages.error(request,"The email already exist!")
+        else:
+            User.objects.create_user(email=email,password=password)
+            messages.success(request,"User has been created!")
+            return redirect('dashboard')
+    return render(request,"accounts/create_user.html")

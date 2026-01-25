@@ -1,0 +1,40 @@
+.messages {
+    margin: 15px 0;
+}
+
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 400px;
+}
+
+/* Success */
+.alert.success {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+    border: 1px solid #b7dfc2;
+}
+
+/* Error */
+.alert.error {
+    background-color: #fdecea;
+    color: #b02a37;
+    border: 1px solid #f5c2c7;
+}
+
+/* Warning */
+.alert.warning {
+    background-color: #fff4e5;
+    color: #856404;
+    border: 1px solid #ffe0b2;
+}
+
+/* Info */
+.alert.info {
+    background-color: #e8f1fd;
+    color: #084298;
+    border: 1px solid #b6d4fe;
+}

@@ -2,6 +2,7 @@ from django.shortcuts import redirect,render
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
+from accessControl.decorators import require_permission
 # Create your views here.
 def login_view(request):
     if request.method == 'POST':
@@ -23,8 +24,7 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 User = get_user_model()
-@login_required
-@user_passes_test(lambda u: u.is_staff)
+@require_permission('create_user')
 def create_user(request):
     if request.method == "POST":
         email = request.POST.get('email')

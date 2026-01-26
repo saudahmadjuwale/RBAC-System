@@ -1,4 +1,4 @@
-from django.http HttpResponseForbidden
+from django.http import HttpResponseForbidden
 from functools import wraps
 
 def require_permission(permission_name):
@@ -19,7 +19,7 @@ def require_permission(permission_name):
                 return HttpResponseForbidden(f"You don't have permission access {permission_name} !")
             
             return view_func(request,*args,**kwargs)
-        return wrapped_view
+        return _wrapped_view
     return decorators
 
 

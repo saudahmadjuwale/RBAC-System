@@ -17,7 +17,6 @@
         </div>
     {% endif %}
     <h2>Create User</h2>
-
     <form method="POST">
         {% csrf_token %}
         <label>Email:</label><br>
@@ -25,10 +24,20 @@
 
         <label>Password:</label><br>
         <input type="password" name="password" required><br><br>
-
+        {% for role in roles %}
+            <input type="radio" name="role" value="{{ role.id }}" required>
+            {{ role.name }} <br>
+        {% empty %}
+            <p>No roles available</p>
+        {% endfor %}
         <button type="submit">Create User</button>
     </form>
-
+    <h2>List of all Users</h2>
+    {% for user in users %}
+        <a href="{% url 'update_user' user.id %}">{{forloop.counter}}. {{user.email}}</a><br>
+    {% empty %}
+        <p>No users found</p>
+    {% endfor %}
     <p><a href="{% url 'dashboard' %}">Back to Dashboard</a></p>
 </body>
 <script src="{% static 'js/messages.js' %}"></script>

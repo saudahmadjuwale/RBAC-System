@@ -18,9 +18,9 @@
     <h2>Dashboard</h2>
 
     <p>Welcome, {{ request.user.email }}</p>
-    {% if request.user.is_staff %}
-        <a href="{% url 'create_user' %}">Create User</a><br><br>
-    {% endif %}
+    <a href="{% url 'create_user' %}">Create User</a><br><br>
+    <a href="{% url 'accessControl:create_role' %}">Create Role</a><br><br>
+    <a href="{% url 'accessControl:create_permission' %}">Create Permissions</a><br><br>
     <a href="{% url 'logout' %}">Logout</a>
 </body>
 <script src="{% static 'js/messages.js' %}"></script>

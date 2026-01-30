@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create User</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <h2>Update User</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" value="{{ user.email }}" required><br>
+        {% for role in roles %} 
+    <input type="radio" name="role" value="{{ role.id }}" {% if user.role and user.role.id == role.id %}checked{% endif %} required> {{ role.name }} <br>
+        {% endfor %}
+    <button type="submit">Upadte User</button>
+    </form>
+    <p><a href="{% url 'create_user' %}">Back to Create User</a></p>
+</body>
+<script src="{% static 'js/messages.js' %}"></script>
+</html>

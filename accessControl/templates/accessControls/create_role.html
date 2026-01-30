@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Role</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<h2>Create Role</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Role Name</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <h4>Assign Permissions</h4>
+
+    {% for perm in permissions %}
+        <input type="checkbox" name="permissions" value="{{ perm.id }}">
+        {{ perm.jobs }} <br>
+    {% empty %}
+        <p>No permissions available</p>
+    {% endfor %}
+
+    <br>
+    <button type="submit">Create Role</button>
+</form>
+
+<script src="{% static 'js/messages.js' %}"></script>
+</body>
+</html>
